@@ -84,13 +84,24 @@ export default function ProductsGrid() {
       {/* Product grid */}
       {filteredProducts.length === 0 ? (
         <div className="rounded-xl border border-border bg-card p-12 text-center dark:border-white/10">
-          <p className="mb-4 text-muted-foreground">No products match your selection.</p>
-          <Link
-            href="/categories"
-            className="inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90"
-          >
-            Browse Categories
-          </Link>
+          <p className="mb-2 text-muted-foreground">No products match your selection.</p>
+          <p className="mb-4 font-medium text-foreground">
+            Connect with us – we will get it for you at a great deal price.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/contact"
+              className="inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90"
+            >
+              Contact us
+            </Link>
+            <Link
+              href="/categories"
+              className="inline-block rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/10"
+            >
+              Browse categories
+            </Link>
+          </div>
         </div>
       ) : (
         <ul className="grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-3 lg:grid-cols-4 lg:gap-4">

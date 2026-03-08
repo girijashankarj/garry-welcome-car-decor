@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { brands } from '@/data/brands';
+import { assetPath } from '@/lib/assetPath';
 import { getModelsByBrandId } from '@/data/models';
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function BrandsPage() {
                 {brand.logoPath && (
                   <div className="relative flex h-20 w-32 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-3 dark:bg-white/10">
                     <Image
-                      src={brand.logoPath}
+                      src={assetPath(brand.logoPath)}
                       alt=""
                       width={128}
                       height={80}

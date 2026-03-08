@@ -5,7 +5,9 @@ import { ThemeProvider } from './components/ThemeContext';
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' });
 import AppLayout from './components/AppLayout';
+import Chatbot from './components/Chatbot';
 import { SITE } from '@/lib/site';
+import { assetPath } from '@/lib/assetPath';
 import Analytics from './components/Analytics';
 import JsonLd from './components/JsonLd';
 
@@ -16,8 +18,8 @@ export const metadata: Metadata = {
   keywords: ['car accessories', 'PPF', 'car filming', 'car charger', 'LED headlights', 'dash cam', 'car speakers', 'India'],
   authors: [{ name: SITE.name }],
   icons: {
-    icon: '/icon.svg',
-    apple: '/images/branding/icon-512.png',
+    icon: assetPath('/icon.svg'),
+    apple: assetPath('/images/branding/icon-512.png'),
   },
   openGraph: {
     type: 'website',
@@ -26,13 +28,13 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: SITE.name,
     description: SITE.description,
-    images: [{ url: '/images/branding/og-image.png', width: 1200, height: 630, alt: SITE.name }],
+    images: [{ url: assetPath('/images/branding/og-image.png'), width: 1200, height: 630, alt: SITE.name }],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE.name,
     description: SITE.description,
-    images: ['/images/branding/og-image.png'],
+    images: [assetPath('/images/branding/og-image.png')],
   },
   robots: {
     index: true,
@@ -64,6 +66,7 @@ export default function RootLayout({
         <JsonLd />
         <ThemeProvider>
           <AppLayout>{children}</AppLayout>
+          <Chatbot />
         </ThemeProvider>
         <Analytics />
       </body>

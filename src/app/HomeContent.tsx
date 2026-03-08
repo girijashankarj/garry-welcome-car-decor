@@ -12,6 +12,7 @@ import { getProductsByCategoryId } from '@/data/products';
 import { getModelsByBrandId } from '@/data/models';
 import { getAllProducts } from '@/data/products';
 import { categoryImages } from '@/lib/category-icons';
+import { assetPath } from '@/lib/assetPath';
 import type { ProductCategoryId } from '@/data/types';
 import ProductCard from './components/ProductCard';
 import ContactSection from './components/ContactSection';
@@ -43,7 +44,7 @@ export default function HomeContent() {
       <section className="relative flex min-h-[85vh] flex-col justify-end overflow-hidden sm:min-h-[90vh]">
         <div className="absolute inset-0">
           <Image
-            src={(siteData.home as { heroImage?: string })?.heroImage ?? '/images/products/ppf.jpg'}
+            src={assetPath((siteData.home as { heroImage?: string })?.heroImage ?? '/images/products/ppf.jpg')}
             alt=""
             fill
             className="object-cover"
@@ -71,15 +72,15 @@ export default function HomeContent() {
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
             className="mb-2 text-lg text-white/80 sm:text-xl"
           >
-            PPF, chargers, headlights, dash cams & more
+            PPF, chargers, headlights, dash cams & more – delivered across India
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mb-10 text-base font-medium text-white/90 sm:text-lg"
+            className="mb-10 text-sm font-medium text-white/90 sm:text-base"
           >
-            All types of car accessories are available
+            Delivery all over India • Open for collaboration • Trusted references for car services
           </motion.p>
 
           {/* Search - primary CTA */}
@@ -200,7 +201,7 @@ export default function HomeContent() {
                 >
                   <div className="relative aspect-square overflow-hidden">
                     <Image
-                      src={imgSrc}
+                      src={assetPath(imgSrc)}
                       alt={cat.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -234,7 +235,7 @@ export default function HomeContent() {
                   {brand.logoPath && (
                     <div className="relative flex h-14 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-2 dark:bg-white/10">
                       <Image
-                        src={brand.logoPath}
+                        src={assetPath(brand.logoPath)}
                         alt=""
                         width={96}
                         height={56}
@@ -254,6 +255,33 @@ export default function HomeContent() {
           <Link href="/brands" className="mt-4 inline-block text-sm font-medium text-primary hover:underline">
             View all brands →
           </Link>
+        </div>
+      </section>
+
+      {/* What we offer */}
+      <section className="border-t border-border py-12 md:py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">What we offer</h2>
+          <ul className="grid list-none gap-4 p-0 sm:grid-cols-3">
+            <li className="rounded-xl border border-border bg-card p-4 dark:border-white/10">
+              <h3 className="mb-2 font-semibold text-foreground">Delivery all over India</h3>
+              <p className="text-sm text-muted-foreground">
+                We provide delivery all over India via courier. Order from anywhere.
+              </p>
+            </li>
+            <li className="rounded-xl border border-border bg-card p-4 dark:border-white/10">
+              <h3 className="mb-2 font-semibold text-foreground">Open for collaboration</h3>
+              <p className="text-sm text-muted-foreground">
+                We are open for collaboration to keep your products in stock for sale. Manufacturers and distributors – reach out.
+              </p>
+            </li>
+            <li className="rounded-xl border border-border bg-card p-4 dark:border-white/10">
+              <h3 className="mb-2 font-semibold text-foreground">Car services & references</h3>
+              <p className="text-sm text-muted-foreground">
+                We provide references for insurance, garages, manufacturers, and more. Ask us for trusted recommendations.
+              </p>
+            </li>
+          </ul>
         </div>
       </section>
 

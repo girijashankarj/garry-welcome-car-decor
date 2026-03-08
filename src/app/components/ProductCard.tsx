@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Product } from '@/data/types';
 import { getCategoryById } from '@/data/categories';
 import { formatPrice } from '@/lib/format';
+import { assetPath } from '@/lib/assetPath';
 
 const PLACEHOLDER_IMG = '/images/products/placeholder.svg';
 
@@ -13,7 +14,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, showViewDetails = true }: ProductCardProps) {
   const category = getCategoryById(product.categoryId);
-  const imgSrc = product.imagePath || PLACEHOLDER_IMG;
+  const imgSrc = assetPath(product.imagePath || PLACEHOLDER_IMG);
 
   return (
     <article className="group overflow-hidden rounded-2xl bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">

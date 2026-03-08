@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { models, getModelBySlug } from '@/data/models';
+import ConnectWithUsCard from '@/app/components/ConnectWithUsCard';
 import { getBrandById } from '@/data/brands';
 import { getProductsByModelId, getAllProducts } from '@/data/products';
 import { getCategoryById } from '@/data/categories';
@@ -39,7 +39,28 @@ export default async function ModelDetailPage({ params }: Props) {
   const { slug } = await params;
   const resolvedSlug = SLUG_ALIASES[slug] ?? slug;
   const model = getModelBySlug(resolvedSlug);
-  if (!model) notFound();
+
+  if (!model) {
+    return (
+      <div className="mx-auto max-w-2xl">
+        <nav className="mb-6 flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-primary hover:underline">
+            Home
+          </Link>
+          <span>/</span>
+          <Link href="/brands" className="hover:text-primary hover:underline">
+            Brands
+          </Link>
+          <span>/</span>
+          <span className="text-foreground">Model not found</span>
+        </nav>
+        <ConnectWithUsCard
+          title="Model not found"
+          backLink={{ href: '/brands', text: 'Browse all brands' }}
+        />
+      </div>
+    );
+  }
 
   const brand = getBrandById(model.brandId);
   const modelProducts = getProductsByModelId(model.id);
@@ -104,15 +125,26 @@ export default async function ModelDetailPage({ params }: Props) {
         </section>
       ) : (
         <section className="mb-10 rounded-xl border border-border bg-card p-6 dark:border-white/10">
-          <p className="mb-4 text-muted-foreground">
-            No model-specific accessories listed yet. Browse our universal accessories below, suitable for all cars.
+          <p className="mb-2 text-muted-foreground">
+            No model-specific accessories listed yet.
           </p>
-          <Link
-            href="/categories"
-            className="inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90"
-          >
-            Browse All Categories
-          </Link>
+          <p className="mb-4 font-medium text-foreground">
+            Connect with us – we will get it for you at a great deal price.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/contact"
+              className="inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90"
+            >
+              Contact us
+            </Link>
+            <Link
+              href="/categories"
+              className="inline-block rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/10"
+            >
+              Browse all categories
+            </Link>
+          </div>
         </section>
       )}
 

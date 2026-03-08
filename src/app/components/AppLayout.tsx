@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import siteData from '@/data/site.json';
+import { assetPath } from '@/lib/assetPath';
 
 const navIcons: Record<string, string> = {
   Home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
@@ -103,7 +104,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-border bg-card/95 px-4 py-3 backdrop-blur-md sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2.5 no-underline">
           <Image
-            src="/images/branding/icon-512.png"
+            src={assetPath('/images/branding/icon-512.png')}
             alt=""
             width={36}
             height={36}

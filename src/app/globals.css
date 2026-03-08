@@ -29,7 +29,8 @@
   }
 
   :root {
-    /* KRR-style colors - light mode */
+    color-scheme: light;
+    /* KRR-style colors - light mode (default) */
     --color-background: #F8F9FA;
     --color-foreground: #2D3436;
     --color-muted: #f1f3f5;
@@ -51,7 +52,8 @@
   }
 
   .dark {
-    /* KRR-style colors - dark mode (default) */
+    color-scheme: dark;
+    /* KRR-style colors - dark mode */
     --color-background: #0A0A0A;
     --color-foreground: #FFFFFF;
     --color-muted: #121212;

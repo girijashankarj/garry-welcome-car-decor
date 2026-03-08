@@ -36,10 +36,10 @@ export default function GuidesPage() {
           <h2 className="mb-3 text-lg font-semibold text-foreground">Delivery</h2>
           <div className="space-y-2 text-muted-foreground">
             <p>
-              <strong className="text-foreground">Pune & nearby</strong> – We deliver in Pune and surrounding areas. Delivery charges may apply based on distance.
+              <strong className="text-foreground">All over India</strong> – We provide delivery all over India via courier. Shipping cost depends on product size, weight, and destination.
             </p>
             <p>
-              <strong className="text-foreground">All India</strong> – We ship across India via courier. Shipping cost depends on product size, weight, and destination.
+              <strong className="text-foreground">Pune & nearby</strong> – We deliver in Pune and surrounding areas. Delivery charges may apply based on distance.
             </p>
             <p>
               <strong className="text-foreground">Pickup</strong> – You can collect orders from our store at Near Bhandari Petrol Pump, Mumbai-Pune Road, Kasarwadi, Pune.
@@ -85,6 +85,24 @@ export default function GuidesPage() {
             </p>
             <p>
               <strong className="text-foreground">Refund timeline</strong> – Refunds are processed within 5–7 business days after approval. The amount will be credited to the original payment method.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-foreground">Collaboration</h2>
+          <div className="space-y-2 text-muted-foreground">
+            <p>
+              We are open for collaboration to keep your products in stock for sale. If you manufacture or distribute car accessories and want to reach more customers, reach out to discuss stocking arrangements.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-foreground">Car Services & References</h2>
+          <div className="space-y-2 text-muted-foreground">
+            <p>
+              We also provide references for all car-related services – insurance, garages, manufacturers, and more. Need a trusted mechanic, insurance agent, or service centre? Ask us for recommendations.
             </p>
           </div>
         </section>

@@ -57,7 +57,10 @@ function SearchContent() {
           </p>
           {results.length === 0 ? (
             <div className="rounded-xl border border-border bg-card p-8 dark:border-white/10">
-              <p className="mb-4 text-muted-foreground">No products match your search.</p>
+              <p className="mb-2 text-muted-foreground">No products match your search.</p>
+              <p className="mb-4 font-medium text-foreground">
+                Connect with us – we will get it for you at a great deal price.
+              </p>
               <p className="mb-4 text-sm text-muted-foreground">Try browsing by category:</p>
               <ul className="flex flex-wrap gap-2">
                 {categories.map((cat) => (
@@ -71,12 +74,20 @@ function SearchContent() {
                   </li>
                 ))}
               </ul>
-              <Link
-                href="/categories"
-                className="mt-4 inline-block text-sm font-medium text-primary hover:underline"
-              >
-                View all categories →
-              </Link>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90"
+                >
+                  Contact us
+                </Link>
+                <Link
+                  href="/categories"
+                  className="inline-block text-sm font-medium text-primary hover:underline"
+                >
+                  View all categories →
+                </Link>
+              </div>
             </div>
           ) : (
             <ul className="grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">

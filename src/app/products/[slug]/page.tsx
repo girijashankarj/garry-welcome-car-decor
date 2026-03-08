@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { products, getProductBySlug } from '@/data/products';
 import { getCategoryById } from '@/data/categories';
 import { formatPrice } from '@/lib/format';
+import { assetPath } from '@/lib/assetPath';
 import siteData from '@/data/site.json';
+import ConnectWithUsCard from '@/app/components/ConnectWithUsCard';
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: product.name,
       description: product.description,
-      images: product.imagePath ? [{ url: product.imagePath }] : undefined,
+      images: product.imagePath ? [{ url: assetPath(product.imagePath) }] : undefined,
     },
   };
 }
@@ -38,10 +39,32 @@ function getWhatsAppUrl(phone: string, productName: string): string {
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) notFound();
+
+  if (!product) {
+    return (
+      <div className="mx-auto max-w-2xl">
+        <nav className="mb-6 flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-primary hover:underline">
+            Home
+          </Link>
+          <span>/</span>
+          <Link href="/products" className="hover:text-primary hover:underline">
+            Products
+          </Link>
+          <span>/</span>
+          <span className="text-foreground">Product not found</span>
+        </nav>
+        <ConnectWithUsCard
+          title="Product not available"
+          backLink={{ href: '/products', text: 'Browse all products' }}
+          whatsappMessage="Hi, I'm looking for a product that wasn't on your site. Can you help me get it at a great deal?"
+        />
+      </div>
+    );
+  }
 
   const category = getCategoryById(product.categoryId);
-  const imgSrc = product.imagePath || '/images/products/placeholder.svg';
+  const imgSrc = assetPath(product.imagePath || '/images/products/placeholder.svg');
   const contact = siteData.contact as { whatsapp?: string; phone?: string } | undefined;
   const whatsappNumber = contact?.whatsapp?.trim();
   const phoneNumber = contact?.phone?.trim();
