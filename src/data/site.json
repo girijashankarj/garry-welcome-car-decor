@@ -1,0 +1,76 @@
+{
+  "app": {
+    "name": "Welcome Car Decor",
+    "shortName": "WCD",
+    "tagline": "Car Exterior Decor & Accessories",
+    "description": "Your dealer for car exterior decor and accessories – filming, chargers, headlights, speakers and more.",
+    "copyright": "© 2024 Welcome Car Decor. All rights reserved."
+  },
+  "navigation": [
+    { "text": "Home", "path": "/" },
+    { "text": "Products", "path": "/categories" },
+    { "text": "Brands", "path": "/brands" },
+    { "text": "Search", "path": "/search" },
+    { "text": "Contact", "path": "/contact" }
+  ],
+  "footer": {
+    "links": [
+      { "text": "Privacy", "path": "/privacy" },
+      { "text": "Terms", "path": "/terms" },
+      { "text": "Contact", "path": "/contact" }
+    ],
+    "social": [
+      { "text": "Instagram", "url": "https://instagram.com/welcomecardecor", "icon": "instagram" }
+    ]
+  },
+  "mission": {
+    "title": "Our Mission",
+    "statement": "Providing quality car exterior decor and accessories – filming, chargers, headlights, speakers and more – to help you personalize and enhance your vehicle."
+  },
+  "features": [
+    {
+      "title": "Browse by Brand",
+      "description": "Find accessories by car brand and model. Maruti Suzuki, Hyundai, Honda, Toyota, Tata, Mahindra, Kia, MG – with real colors and models."
+    },
+    {
+      "title": "Categories",
+      "description": "PPF & filming, chargers, headlights, speakers, dash cams and accessories. Real products from Aegis, Toreto, 70mai, Metaflix and more."
+    },
+    {
+      "title": "Quality Products",
+      "description": "Premium car accessories from trusted brands. PPF, dash cams, LED headlights, and more – with prices and availability."
+    }
+  ],
+  "contact": {
+    "instagram": "https://instagram.com/welcomecardecor",
+    "whatsapp": "",
+    "phone": "",
+    "address": "Pune, Maharashtra, India",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.17!2d73.722878!3d18.524411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1708233988330!5m2!1sen!2sin",
+    "mapDirectionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Pune,+Maharashtra,+India"
+  },
+  "testimonials": [
+    {
+      "quote": "Got PPF installed for my Creta. Quality work and fair pricing. Highly recommend!",
+      "author": "Rahul M.",
+      "location": "Pune"
+    },
+    {
+      "quote": "Bought dash cam and car charger. Quick response and genuine products.",
+      "author": "Priya S.",
+      "location": "Pune"
+    }
+  ],
+  "home": {
+    "title": "Welcome Car Decor",
+    "tagline": "Car exterior decor and accessories – filming, chargers, headlights, speakers and more.",
+    "actions": {
+      "browseBrands": "Browse by Brand",
+      "viewCategories": "View Categories"
+    },
+    "story": {
+      "title": "Our Story",
+      "content": "Welcome Car Decor is your trusted dealer for car exterior decor and accessories. From filming and chargers to headlights and speakers, we help you personalize and enhance your vehicle with quality products."
+    }
+  }
+}

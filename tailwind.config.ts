@@ -9,6 +9,9 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        rajdhani: ['Rajdhani', 'sans-serif'],
+      },
       colors: {
         background: 'var(--color-background)',
         foreground: 'var(--color-foreground)',

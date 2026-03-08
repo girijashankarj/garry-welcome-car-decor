@@ -11,6 +11,8 @@
     "clean": "rm -rf .next out"
   },
   "dependencies": {
+    "@fontsource/rajdhani": "^5.2.7",
+    "framer-motion": "^12.35.1",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

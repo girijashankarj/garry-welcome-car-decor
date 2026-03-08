@@ -1,18 +1,21 @@
 # Welcome Car Decor
 
-Dealer website for car exterior decor and accessories: car filming, chargers, headlights, speakers and more. Users can browse by car brand and model, by category, or search directly.
+Dealer website for car exterior decor and accessories: PPF, filming, chargers, headlights, speakers, dash cams and more. Users can browse by car brand and model, by category, or search directly.
 
 ## Features
 
-- **Browse by brand** – List car brands; select one to see models and compatible accessories.
-- **Browse by model** – From a brand, select a model to see products for that model.
-- **Categories** – Filming, Chargers, Headlights, Speakers, Accessories.
-- **Search** – Search products by name or description (client-side, static data).
+- **Browse by brand** – Maruti Suzuki, Hyundai, Honda, Toyota, Tata, Mahindra, Kia, MG with models and colors
+- **Browse by model** – See available colors and compatible accessories per model
+- **Categories** – PPF & filming, Chargers, Headlights, Speakers, Dash Cams, Accessories
+- **Search** – Search products by name, description, or vendor (client-side, static data)
+- **Contact** – Email for inquiries
+- **SEO** – Per-page metadata, sitemap, robots.txt, Open Graph, JSON-LD
+- **Production-ready** – Error boundary, loading states, favicon, analytics support
 
 ## Tech stack
 
-- **Next.js 15** (App Router), **TypeScript**, **Tailwind CSS**
-- Static export (`output: 'export'`) for hosting on S3, CloudFront, or any static host.
+- **Next.js 15** (App Router), **TypeScript**, **Tailwind CSS**, **Framer Motion**
+- Static export (`output: 'export'`) for hosting on S3, CloudFront, Vercel, or any static host
 
 ## Quick start
 
@@ -33,18 +36,31 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | Run ESLint               |
 | `npm run lint:fix` | Fix lint issues      |
 
+## Environment
+
+Copy `.env.example` to `.env.local` and optionally set:
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Public site URL (for sitemap, OG tags). Default: `https://welcomecardecor.com` |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Contact email. Default: `contact@welcomecardecor.com` |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics ID (e.g. `G-XXXXXXXXXX`). Omit to disable analytics |
+
 ## Project structure
 
 ```
 src/
-├── app/              # Next.js App Router pages and layout
+├── app/              # Next.js App Router
 │   ├── brands/       # List brands, brand detail (models)
-│   ├── models/       # Model detail (products)
 │   ├── categories/   # List categories, category detail (products)
+│   ├── models/       # Model detail (colors, products)
 │   ├── search/       # Search page
-│   └── components/   # Nav, etc.
-├── data/             # Static data (brands, models, products, categories)
-├── lib/              # Utilities
+│   ├── contact/      # Contact page
+│   ├── privacy/      # Privacy policy
+│   ├── terms/        # Terms of service
+│   └── components/   # AppLayout, ProductCard, ThemeToggle, etc.
+├── data/             # Static data (brands, models, products, categories, site)
+├── lib/              # Utilities (format, site config)
 └── theme/            # CSS variables
 ```
 
@@ -52,13 +68,9 @@ src/
 
 The app is built as a static export. After `npm run build`, the `out/` directory contains the static site.
 
-- **Option A – AWS**: Upload `out/` to an S3 bucket and optionally put CloudFront in front. Use the GitHub Action **Deploy – Web** (manual trigger) if you configure AWS credentials (e.g. `AWS_ROLE_ARN_TO_ASSUME` for OIDC).
-- **Option B – Vercel/Netlify**: Connect the repo and use the framework preset for Next.js (static export).
-- **Option C – Manual**: Run `aws s3 sync out/ s3://YOUR_BUCKET --delete` (or similar) after build.
-
-## Environment
-
-Optional: create `.env.local` from `.env.example`. No secrets required for the static site; use `NEXT_PUBLIC_SITE_URL` only if you need absolute URLs.
+- **AWS**: Upload `out/` to an S3 bucket; optionally use CloudFront. Use the GitHub Action **Deploy – Web** if configured.
+- **Vercel/Netlify**: Connect the repo and use the Next.js preset (static export).
+- **Manual**: `aws s3 sync out/ s3://YOUR_BUCKET --delete` (or equivalent).
 
 ## License
 

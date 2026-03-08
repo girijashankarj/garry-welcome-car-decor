@@ -1,29 +1,75 @@
+@import '@fontsource/rajdhani/300.css';
+@import '@fontsource/rajdhani/400.css';
+@import '@fontsource/rajdhani/500.css';
+@import '@fontsource/rajdhani/600.css';
+@import '@fontsource/rajdhani/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* Global page background - applies to all pages */
+  body {
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(229, 57, 53, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(229, 57, 53, 0.05), transparent),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgba(229, 57, 53, 0.05), transparent);
+  }
+  html.dark body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(229, 57, 53, 0.12), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(229, 57, 53, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgba(229, 57, 53, 0.08), transparent);
+  }
+
   :root {
-    --color-background: #ffffff;
-    --color-foreground: #0a0a0a;
-    --color-muted: #f4f4f5;
-    --color-muted-foreground: #71717a;
-    --color-border: #e4e4e7;
-    --color-primary: #0d47a1;
-    --color-primary-foreground: #fafafa;
+    /* KRR-style colors - light mode */
+    --color-background: #F8F9FA;
+    --color-foreground: #2D3436;
+    --color-muted: #f1f3f5;
+    --color-muted-foreground: #636E72;
+    --color-border: rgba(0,0,0,0.1);
+    --color-primary: #E53935;
+    --color-primary-hover: #D4202C;
+    --color-primary-foreground: #ffffff;
     --color-card: #ffffff;
-    --color-card-foreground: #0a0a0a;
+    --color-card-foreground: #2D3436;
+    --color-gradient-text: linear-gradient(45deg, #D4202C 30%, #FF4B57 90%);
+    --color-gradient-button: linear-gradient(45deg, #E53935 30%, #FF6B6B 90%);
   }
 
   .dark {
-    --color-background: #18181b;
-    --color-foreground: #fafafa;
-    --color-muted: #27272a;
-    --color-muted-foreground: #a1a1aa;
-    --color-border: #3f3f46;
-    --color-primary: #60a5fa;
-    --color-primary-foreground: #18181b;
-    --color-card: #27272a;
-    --color-card-foreground: #fafafa;
+    /* KRR-style colors - dark mode (default) */
+    --color-background: #0A0A0A;
+    --color-foreground: #FFFFFF;
+    --color-muted: #121212;
+    --color-muted-foreground: #B8C4B3;
+    --color-border: rgba(255,255,255,0.1);
+    --color-primary: #E53935;
+    --color-primary-hover: #FF6B6B;
+    --color-primary-foreground: #ffffff;
+    --color-card: #121212;
+    --color-card-foreground: #FFFFFF;
+    --color-gradient-text: linear-gradient(45deg, #D4202C 30%, #FF4B57 90%);
+    --color-gradient-button: linear-gradient(45deg, #E53935 30%, #FF6B6B 90%);
+  }
+
+  /* Keyboard focus - visible ring for accessibility */
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 }

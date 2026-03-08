@@ -1,69 +1,144 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { models, getModelBySlug } from '@/data/models';
 import { getBrandById } from '@/data/brands';
-import { getProductsByModelId } from '@/data/products';
+import { getProductsByModelId, getAllProducts } from '@/data/products';
 import { getCategoryById } from '@/data/categories';
+import ProductCard from '@/app/components/ProductCard';
+
+const SLUG_ALIASES: Record<string, string> = {
+  innova: 'innova-crysta',
+  scorpio: 'scorpio-n',
+};
 
 export function generateStaticParams() {
-  return models.map((m) => ({ slug: m.slug }));
+  const base = models.map((m) => ({ slug: m.slug }));
+  const aliases = [{ slug: 'innova' }, { slug: 'scorpio' }];
+  return [...base, ...aliases];
 }
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const resolvedSlug = SLUG_ALIASES[slug] ?? slug;
+  const model = getModelBySlug(resolvedSlug);
+  const brand = model ? getBrandById(model.brandId) : null;
+  if (!model) return {};
+  return {
+    title: `${brand?.name ?? ''} ${model.name} – Colors & Accessories`.trim(),
+    description: model.colors
+      ? `${model.name} available in ${model.colors.length} colors. Browse compatible car accessories – PPF, chargers, headlights, dash cams.`
+      : `Browse accessories for ${brand?.name ?? ''} ${model.name}.`,
+  };
+}
+
 export default async function ModelDetailPage({ params }: Props) {
   const { slug } = await params;
-  const model = getModelBySlug(slug);
+  const resolvedSlug = SLUG_ALIASES[slug] ?? slug;
+  const model = getModelBySlug(resolvedSlug);
   if (!model) notFound();
 
   const brand = getBrandById(model.brandId);
   const modelProducts = getProductsByModelId(model.id);
+  const universalProducts = getAllProducts().filter((p) => !p.modelId).slice(0, 6);
 
   return (
-    <>
-      <nav className="mb-4 text-sm text-muted-foreground">
-        <Link href="/brands" className="hover:underline">
+    <div className="mx-auto max-w-6xl">
+      <nav className="mb-4 flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+        <Link href="/brands" className="hover:text-primary hover:underline">
           Brands
         </Link>
         {brand && (
           <>
-            <span className="mx-2">/</span>
-            <Link href={`/brands/${brand.slug}`} className="hover:underline">
+            <span>/</span>
+            <Link href={`/brands/${brand.slug}`} className="hover:text-primary hover:underline">
               {brand.name}
             </Link>
           </>
         )}
-        <span className="mx-2">/</span>
+        <span>/</span>
         <span className="text-foreground">{model.name}</span>
       </nav>
-      <h1 className="mb-4 text-2xl font-bold text-foreground">
+
+      <h1 className="mb-2 text-2xl font-bold text-foreground md:text-3xl">
         {brand?.name} {model.name}
       </h1>
-      <p className="mb-6 text-muted-foreground">
-        Accessories compatible with this model.
+      <p className="mb-8 text-muted-foreground">
+        Accessories compatible with this model. Select a category to browse all products.
       </p>
-      {modelProducts.length === 0 ? (
-        <p className="text-muted-foreground">No products linked to this model yet.</p>
-      ) : (
-        <ul className="grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-          {modelProducts.map((product) => {
-            const category = getCategoryById(product.categoryId);
-            return (
-              <li key={product.id}>
-                <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-                  <h2 className="mb-1 font-semibold text-card-foreground">{product.name}</h2>
-                  {category && (
-                    <p className="mb-2 text-xs text-muted-foreground">{category.name}</p>
-                  )}
-                  <p className="text-sm text-muted-foreground">{product.description}</p>
-                </div>
+
+      {model.colors && model.colors.length > 0 && (
+        <section className="mb-10">
+          <h2 className="mb-3 text-lg font-semibold text-foreground">Available Colors</h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Exterior colors offered by {brand?.name ?? 'the manufacturer'} for the {model.name}.
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {model.colors.map((color) => (
+              <li
+                key={color}
+                className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-card-foreground dark:border-white/10"
+              >
+                {color}
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        </section>
       )}
-    </>
+
+      {modelProducts.length > 0 ? (
+        <section className="mb-10">
+          <h2 className="mb-4 text-lg font-semibold text-foreground">Model-Specific Accessories</h2>
+          <ul className="grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {modelProducts.map((product) => (
+              <li key={product.id}>
+                <Link href={`/products/${product.slug}`} className="block no-underline">
+                  <ProductCard product={product} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : (
+        <section className="mb-10 rounded-xl border border-border bg-card p-6 dark:border-white/10">
+          <p className="mb-4 text-muted-foreground">
+            No model-specific accessories listed yet. Browse our universal accessories below, suitable for all cars.
+          </p>
+          <Link
+            href="/categories"
+            className="inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90"
+          >
+            Browse All Categories
+          </Link>
+        </section>
+      )}
+
+      {universalProducts.length > 0 && (
+        <section>
+          <h2 className="mb-4 text-lg font-semibold text-foreground">Popular Accessories (All Cars)</h2>
+          <ul className="grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {universalProducts.map((product) => (
+              <li key={product.id}>
+                <Link href={`/products/${product.slug}`} className="block no-underline">
+                  <ProductCard product={product} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6">
+            <Link
+              href="/categories"
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              View all categories →
+            </Link>
+          </div>
+        </section>
+      )}
+    </div>
   );
 }
