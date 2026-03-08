@@ -77,9 +77,17 @@ The home page hero uses `public/images/hero.jpg` (configurable in `src/data/site
 
 The app is built as a static export. After `npm run build`, the `out/` directory contains the static site.
 
-- **AWS**: Upload `out/` to an S3 bucket; optionally use CloudFront. Use the GitHub Action **Deploy – Web** if configured.
-- **Vercel/Netlify**: Connect the repo and use the Next.js preset (static export).
-- **Manual**: `aws s3 sync out/ s3://YOUR_BUCKET --delete` (or equivalent).
+### GitHub Pages (free)
+
+1. In your repo: **Settings → Pages → Build and deployment**
+2. Set **Source** to **GitHub Actions**
+3. Push to `main` – the workflow will build and deploy automatically
+4. Site URL: `https://<username>.github.io/garry-welcome-car-decor/`
+
+### Other options
+
+- **Vercel/Netlify**: Connect the repo and use the Next.js preset (static export). No `basePath` needed.
+- **AWS**: Upload `out/` to an S3 bucket; use the **Deploy – Web** workflow if configured.
 
 ## License
 
