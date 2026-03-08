@@ -1,0 +1,10 @@
+---
+description: "Security guardrails"
+alwaysApply: true
+---
+
+# Security Guardrails
+
+- **NEVER** hardcode API keys, tokens, or credentials; use environment variables
+- **NEVER** log PII; use generic placeholders for infra names in docs
+- **NEVER** commit .env files; validate/sanitize user input (e.g. search) before use

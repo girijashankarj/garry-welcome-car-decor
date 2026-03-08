@@ -1,0 +1,16 @@
+---
+description: "Frontend component architecture and patterns"
+alwaysApply: true
+---
+
+# Frontend Component Patterns
+
+## Component Structure
+- Use `src/app/components/` for layout (Header, Nav, Footer) and shared UI
+- Functional components with hooks only; define props interface above component
+- Destructure props at the function signature; use Tailwind for styling
+- Follow design tokens (CSS variables in globals.css); mobile-first responsive
+
+## Styling
+- Tailwind CSS; no inline styles except dynamic values
+- Use semantic HTML and ARIA where needed; support dark mode via class

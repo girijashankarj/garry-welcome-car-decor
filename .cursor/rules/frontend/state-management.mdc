@@ -1,0 +1,10 @@
+---
+description: "State management"
+alwaysApply: true
+---
+
+# State Management Rules
+
+- Local state: useState for component-scoped state (e.g. search query, filters)
+- URL state: useSearchParams for search query and filters so they are shareable
+- No global state library needed for MVP; keep state minimal and close to usage

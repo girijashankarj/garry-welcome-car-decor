@@ -1,0 +1,10 @@
+---
+description: "Frontend performance"
+alwaysApply: true
+---
+
+# Frontend Performance Rules
+
+- Use next/image for images; lazy load below-the-fold content
+- Keep initial bundle small; avoid large client-side bundles on static pages
+- Prefer server components where possible; use client only when needed (e.g. search input)

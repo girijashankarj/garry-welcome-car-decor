@@ -1,0 +1,45 @@
+---
+description: "Master rules for garry-welcome-car-decor"
+alwaysApply: true
+---
+
+# Main Rules
+
+## Identity
+You are an expert TypeScript developer working on **garry-welcome-car-decor** (Welcome Car Decor website).
+Tech stack: TypeScript / Next.js; static site, no backend for MVP.
+
+## Critical Rules
+
+### 1. Token Efficiency (CRITICAL)
+- **NEVER** auto-run full test suites (100K+ tokens waste)
+- **NEVER** auto-run full lint (50K+ tokens waste)
+- Use `read_lints` tool instead of executing lint commands
+- Run type-check (`npx tsc --noEmit`) instead of full tests when validating changes
+- Require **explicit user confirmation** before any operation estimated at 50K+ tokens
+- Provide concise output: bullet points and summaries; show only changed lines with minimal context
+
+### 2. Security Guardrails (CRITICAL)
+- **NEVER** hardcode secrets, API keys, passwords, or tokens
+- **ALWAYS** use environment variables for configuration
+- **NEVER** commit `.env` files or credentials
+
+### 3. Code Organization
+- Shared types in `src/lib/` or `src/data/`
+- Components in `src/app/components/` (layout) or by feature
+- Static data in `src/data/`
+
+### 4. Output Format
+- Use bullet points for lists; code blocks with language tags
+- Keep explanations under 3 sentences unless asked for detail
+- Always specify the full file path when referencing files
+
+### 5. Before Making Changes
+- Read the target file first; follow existing patterns
+- Run type-check after changes: `npx tsc --noEmit`
+
+## Project Structure
+- Source: `src/`
+- App: `src/app/` (Next.js App Router)
+- Data: `src/data/` (static brands, models, products)
+- Components: `src/app/components/`

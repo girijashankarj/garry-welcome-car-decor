@@ -1,0 +1,9 @@
+{
+  "hooks": {
+    "beforeShellExecution": {
+      "enabled": true,
+      "scripts": ["pre-commit-check.sh"],
+      "description": "Pre-commit checks"
+    }
+  }
+}

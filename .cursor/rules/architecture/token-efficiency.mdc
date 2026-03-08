@@ -1,0 +1,11 @@
+---
+description: "Token optimization"
+alwaysApply: true
+---
+
+# Token Efficiency Rules
+
+- Use `read_lints` instead of running full lint
+- Run `npx tsc --noEmit` for type-check; avoid full test/lint unless user confirms
+- Read only files directly related to the task; show minimal diff when editing
+- Summaries over verbose; bullet points and structured output

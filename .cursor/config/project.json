@@ -1,0 +1,39 @@
+{
+  "project": {
+    "name": "garry-welcome-car-decor",
+    "description": "Welcome Car Decor – dealer website for car exterior decor and accessories",
+    "version": "0.1.0",
+    "repository": "https://github.com/girijashankarj/garry-welcome-car-decor"
+  },
+  "cursor": {
+    "include": {
+      "patterns": ["src/**", "public/**"],
+      "priorityFiles": ["README.md", "package.json", "tsconfig.json"]
+    },
+    "exclude": {
+      "patterns": ["node_modules/**", ".next/**", "out/**", ".git/**"],
+      "largeFiles": ["*.lock", "*.map", "*.min.js", "*.min.css"],
+      "secrets": [".env", ".env.*", "*.pem", "*.key"]
+    },
+    "tokenOptimization": {
+      "contextLayers": {
+        "immediate": 2000,
+        "relevant": 5000,
+        "extended": 10000,
+        "reference": 20000
+      }
+    }
+  },
+  "paths": {
+    "source": "src"
+  },
+  "techStack": {
+    "language": "TypeScript",
+    "framework": "Next.js",
+    "packageManager": "npm"
+  },
+  "testing": {
+    "typeCheckCommand": "npx tsc --noEmit",
+    "lintCommand": "npm run lint"
+  }
+}

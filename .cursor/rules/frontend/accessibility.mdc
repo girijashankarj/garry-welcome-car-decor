@@ -1,0 +1,11 @@
+---
+description: "Accessibility rules"
+alwaysApply: true
+---
+
+# Accessibility Rules
+
+- Use semantic HTML: nav, main, section, header, footer
+- Heading hierarchy: h1 then h2 then h3 (no skip)
+- Label form inputs; add aria-label to icon-only buttons
+- Ensure keyboard navigation and visible focus; minimum contrast for text
