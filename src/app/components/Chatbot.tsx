@@ -122,7 +122,7 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-20 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:bottom-6"
+        className="fixed bottom-24 right-4 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:bottom-6"
         aria-label={open ? t('aria')('closeChat') : t('aria')('openChat')}
       >
         {open ? (
@@ -138,7 +138,7 @@ export default function Chatbot() {
 
       {open && (
         <div
-          className="fixed bottom-36 right-4 z-50 flex w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl dark:border-white/10 sm:bottom-24"
+          className="fixed bottom-40 right-4 z-[60] flex w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl dark:border-white/10 sm:bottom-24"
           role="dialog"
           aria-label={t('aria')('faqChat')}
         >
