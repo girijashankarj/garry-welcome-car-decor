@@ -1,13 +1,28 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { getAllGuides } from '@/data/guides';
 
 export const metadata: Metadata = {
   description: 'How to order, delivery, returns, payment and more. Your guide to buying car accessories from Welcome Car Decor.',
 };
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'How do I order car accessories?', acceptedAnswer: { '@type': 'Answer', text: 'Browse products by category or car brand, contact us via WhatsApp or phone with the product name and quantity, and we\'ll confirm availability, price, and delivery options.' } },
+    { '@type': 'Question', name: 'Do you deliver all over India?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. We provide delivery all over India via courier. We also deliver in Pune and nearby areas, and you can pick up orders from our store in Kasarwadi, Pune.' } },
+    { '@type': 'Question', name: 'What payment methods do you accept?', acceptedAnswer: { '@type': 'Answer', text: 'We accept cash on delivery (COD), UPI, bank transfer, and card payment at our store. For shipped orders, we may request partial or full advance payment.' } },
+    { '@type': 'Question', name: 'What is your return policy?', acceptedAnswer: { '@type': 'Answer', text: 'Defective or wrong items: contact us within 24–48 hours for replacement or refund. Change of mind: unopened items may be returned within 7 days, subject to inspection. Refunds are processed within 5–7 business days.' } },
+    { '@type': 'Question', name: 'Are you open for collaboration?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. We are open for collaboration to keep your products in stock for sale. Manufacturers and distributors can reach out to discuss stocking arrangements.' } },
+    { '@type': 'Question', name: 'Do you provide references for car services?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. We provide references for insurance, garages, manufacturers, and other car-related services. Ask us for trusted recommendations.' } },
+  ],
+};
+
 export default function GuidesPage() {
   return (
     <div className="mx-auto max-w-3xl">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <h1 className="mb-2 text-2xl font-bold text-foreground">Buying Guide</h1>
       <p className="mb-8 text-muted-foreground">
         Everything you need to know about ordering, delivery, payments, and returns.
@@ -122,6 +137,23 @@ export default function GuidesPage() {
           </div>
         </section>
       </div>
+
+      <section className="mt-12 border-t border-border pt-10">
+        <h2 className="mb-4 text-lg font-semibold text-foreground">More guides</h2>
+        <ul className="grid list-none gap-3 p-0 sm:grid-cols-2">
+          {getAllGuides().map((g) => (
+            <li key={g.slug}>
+              <Link
+                href={`/guides/${g.slug}`}
+                className="block rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary/30 hover:bg-muted/50 dark:border-white/10"
+              >
+                <span className="font-medium text-foreground">{g.title}</span>
+                <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{g.description}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <div className="mt-10 flex flex-wrap gap-4">
         <Link

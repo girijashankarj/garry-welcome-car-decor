@@ -7,6 +7,7 @@ import { formatPrice } from '@/lib/format';
 import { assetPath } from '@/lib/assetPath';
 import siteData from '@/data/site.json';
 import ConnectWithUsCard from '@/app/components/ConnectWithUsCard';
+import ProductJsonLd from '@/app/components/ProductJsonLd';
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -70,7 +71,9 @@ export default async function ProductDetailPage({ params }: Props) {
   const phoneNumber = contact?.phone?.trim();
 
   return (
-    <div className="mx-auto max-w-4xl">
+    <>
+      <ProductJsonLd product={product} />
+      <div className="mx-auto max-w-4xl">
       <nav className="mb-6 flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
         <Link href="/" className="hover:text-primary hover:underline">
           Home
@@ -179,5 +182,6 @@ export default async function ProductDetailPage({ params }: Props) {
         </Link>
       </div>
     </div>
+    </>
   );
 }
