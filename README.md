@@ -8,7 +8,8 @@ Dealer website for car exterior decor and accessories: PPF, filming, chargers, h
 - **Browse by model** – See available colors and compatible accessories per model
 - **Categories** – PPF & filming, Chargers, Headlights, Speakers, Dash Cams, Accessories
 - **Search** – Search products by name, description, or vendor (client-side, static data)
-- **Contact** – Email for inquiries
+- **Guides** – How to order, delivery, payment, returns, warranty
+- **Contact** – Email, phone (+91 8888770071), WhatsApp, contact form, Google Maps
 - **SEO** – Per-page metadata, sitemap, robots.txt, Open Graph, JSON-LD
 - **Production-ready** – Error boundary, loading states, favicon, analytics support
 
@@ -44,7 +45,10 @@ Copy `.env.example` to `.env.local` and optionally set:
 |----------|-------------|
 | `NEXT_PUBLIC_SITE_URL` | Public site URL (for sitemap, OG tags). Default: `https://welcomecardecor.com` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Contact email. Default: `contact@welcomecardecor.com` |
+| `NEXT_PUBLIC_FORMSPREE_ID` | Formspree form ID for contact form. Omit to use mailto fallback |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics ID (e.g. `G-XXXXXXXXXX`). Omit to disable analytics |
+
+Phone and WhatsApp are configured in `src/data/site.json` → `contact.phone` and `contact.whatsapp`. Map embed URL is in `contact.mapEmbedUrl`.
 
 ## Project structure
 
@@ -56,6 +60,7 @@ src/
 │   ├── models/       # Model detail (colors, products)
 │   ├── search/       # Search page
 │   ├── contact/      # Contact page
+│   ├── guides/       # Buying guide (order, delivery, payment, returns)
 │   ├── privacy/      # Privacy policy
 │   ├── terms/        # Terms of service
 │   └── components/   # AppLayout, ProductCard, ThemeToggle, etc.
