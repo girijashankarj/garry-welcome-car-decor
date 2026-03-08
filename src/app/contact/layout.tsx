@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact',
   description: 'Contact Welcome Car Decor for product inquiries, bulk orders, and installation support. PPF, chargers, headlights, dash cams.',
 };
 

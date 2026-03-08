@@ -4,23 +4,27 @@
     "shortName": "WCD",
     "tagline": "Car Exterior Decor & Accessories",
     "description": "Your dealer for car exterior decor and accessories – filming, chargers, headlights, speakers and more.",
-    "copyright": "© 2024 Welcome Car Decor. All rights reserved."
+    "copyright": "© 2026 Welcome Car Decor. All rights reserved."
   },
   "navigation": [
     { "text": "Home", "path": "/" },
-    { "text": "Products", "path": "/categories" },
+    { "text": "Products", "path": "/products" },
+    { "text": "Categories", "path": "/categories" },
     { "text": "Brands", "path": "/brands" },
     { "text": "Search", "path": "/search" },
+    { "text": "How to Order", "path": "/guides" },
     { "text": "Contact", "path": "/contact" }
   ],
   "footer": {
     "links": [
+      { "text": "How to Order", "path": "/guides" },
       { "text": "Privacy", "path": "/privacy" },
       { "text": "Terms", "path": "/terms" },
       { "text": "Contact", "path": "/contact" }
     ],
     "social": [
-      { "text": "Instagram", "url": "https://instagram.com/welcomecardecor", "icon": "instagram" }
+      { "text": "Instagram", "url": "https://www.instagram.com/welcome_car_decor/", "icon": "instagram" },
+      { "text": "YouTube", "url": "https://youtube.com/@welcomecardecor", "icon": "youtube" }
     ]
   },
   "mission": {
@@ -42,12 +46,14 @@
     }
   ],
   "contact": {
-    "instagram": "https://instagram.com/welcomecardecor",
-    "whatsapp": "",
-    "phone": "",
-    "address": "Pune, Maharashtra, India",
-    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.17!2d73.722878!3d18.524411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1708233988330!5m2!1sen!2sin",
-    "mapDirectionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Pune,+Maharashtra,+India"
+    "instagram": "https://www.instagram.com/welcome_car_decor/",
+    "youtube": "https://youtube.com/@welcomecardecor",
+    "whatsapp": "918888770071",
+    "phone": "8888770071",
+    "address": "Near Bhandari Petrol Pump, Mumbai-Pune Road, Kasarwadi, Pune-411034",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.334206898399!2d73.82186457606728!3d18.604031782505785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b974874a799b%3A0x7b0cfd3816216e56!2sWELCOME%20CAR%20DECOR!5e0!3m2!1sen!2sin!4v1772990416099!5m2!1sen!2sin",
+    "mapDirectionsUrl": "https://maps.app.goo.gl/MhU1ygfvZ9eLbB3C7",
+    "mapPlaceUrl": "https://maps.app.goo.gl/MhU1ygfvZ9eLbB3C7"
   },
   "testimonials": [
     {
@@ -62,6 +68,7 @@
     }
   ],
   "home": {
+    "heroImage": "/images/hero.jpg",
     "title": "Welcome Car Decor",
     "tagline": "Car exterior decor and accessories – filming, chargers, headlights, speakers and more.",
     "actions": {

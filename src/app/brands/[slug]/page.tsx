@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { brands, getBrandBySlug } from '@/data/brands';
@@ -17,7 +18,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = getBrandBySlug(slug);
   if (!brand) return {};
   return {
-    title: `${brand.name} – Models & Accessories`,
     description: `Browse ${brand.name} car models, available colors, and compatible accessories. PPF, chargers, headlights, dash cams and more.`,
   };
 }
@@ -39,7 +39,21 @@ export default async function BrandDetailPage({ params }: Props) {
         <span className="text-foreground">{brand.name}</span>
       </nav>
 
-      <h1 className="mb-2 text-2xl font-bold text-foreground md:text-3xl">{brand.name}</h1>
+      <div className="mb-6 flex items-center gap-4">
+        {brand.logoPath && (
+          <div className="relative flex h-20 w-32 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-3 dark:bg-white/10">
+            <Image
+              src={brand.logoPath}
+              alt=""
+              width={128}
+              height={80}
+              className="object-contain"
+              unoptimized
+            />
+          </div>
+        )}
+        <h1 className="mb-0 text-2xl font-bold text-foreground md:text-3xl">{brand.name}</h1>
+      </div>
       <p className="mb-8 text-muted-foreground">
         Select a model to see available colors and compatible accessories.
       </p>

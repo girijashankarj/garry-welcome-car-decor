@@ -35,3 +35,13 @@ export const categoryIcons: Record<ProductCategoryId, ReactNode> = {
     </svg>
   ),
 };
+
+/** Representative image for each category (for shop-by-category cards) */
+export const categoryImages: Record<ProductCategoryId, string> = {
+  filming: '/images/products/ppf.jpg',
+  chargers: '/images/products/charger.jpg',
+  headlights: '/images/products/headlight.jpg',
+  speakers: '/images/products/speaker.jpg',
+  dashcam: '/images/products/dashcam.jpg',
+  accessories: '/images/products/organiser.jpg',
+};

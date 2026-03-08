@@ -6,7 +6,6 @@ import { categoryIcons } from '@/lib/category-icons';
 import type { ProductCategoryId } from '@/data/types';
 
 export const metadata: Metadata = {
-  title: 'Categories',
   description: 'Browse car accessories by category – PPF & filming, chargers, headlights, speakers, dash cams, and more.',
 };
 

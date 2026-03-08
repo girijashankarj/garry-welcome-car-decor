@@ -29,7 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = model ? getBrandById(model.brandId) : null;
   if (!model) return {};
   return {
-    title: `${brand?.name ?? ''} ${model.name} – Colors & Accessories`.trim(),
     description: model.colors
       ? `${model.name} available in ${model.colors.length} colors. Browse compatible car accessories – PPF, chargers, headlights, dash cams.`
       : `Browse accessories for ${brand?.name ?? ''} ${model.name}.`,

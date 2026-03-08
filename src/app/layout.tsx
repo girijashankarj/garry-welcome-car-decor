@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
+import { DM_Sans } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from './components/ThemeContext';
+
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' });
 import AppLayout from './components/AppLayout';
 import { SITE } from '@/lib/site';
 import Analytics from './components/Analytics';
@@ -8,15 +11,12 @@ import JsonLd from './components/JsonLd';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: {
-    default: SITE.name,
-    template: `%s | ${SITE.name}`,
-  },
+  title: SITE.name,
   description: SITE.description,
   keywords: ['car accessories', 'PPF', 'car filming', 'car charger', 'LED headlights', 'dash cam', 'car speakers', 'India'],
   authors: [{ name: SITE.name }],
   icons: {
-    icon: '/images/branding/icon-512.png',
+    icon: '/icon.svg',
     apple: '/images/branding/icon-512.png',
   },
   openGraph: {
@@ -60,7 +60,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-background text-foreground font-rajdhani antialiased">
+      <body className={`min-h-screen bg-background text-foreground antialiased ${dmSans.variable} font-sans`}>
         <JsonLd />
         <ThemeProvider>
           <AppLayout>{children}</AppLayout>

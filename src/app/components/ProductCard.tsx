@@ -16,39 +16,33 @@ export default function ProductCard({ product, showViewDetails = true }: Product
   const imgSrc = product.imagePath || PLACEHOLDER_IMG;
 
   return (
-    <article
-      className="group rounded-xl border border-border bg-card overflow-hidden shadow-md transition-all duration-300 hover:border-primary/40 hover:shadow-xl dark:border-white/10 dark:shadow-black/20"
-      style={{
-        backdropFilter: 'blur(10px)',
-      }}
-    >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+    <article className="group overflow-hidden rounded-2xl bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
         <Image
           src={imgSrc}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
       </div>
-      <div className="p-5">
+      <div className="p-4">
         {product.vendor && (
-          <span className="mb-2 inline-block text-xs font-medium uppercase tracking-wide text-primary">
+          <span className="mb-1 block text-xs font-medium uppercase tracking-wider text-primary">
             {product.vendor}
           </span>
         )}
-        <h2 className="mb-2 text-lg font-semibold text-card-foreground">{product.name}</h2>
+        <h2 className="mb-1 line-clamp-2 text-base font-semibold text-foreground">{product.name}</h2>
         {category && (
           <p className="mb-2 text-xs text-muted-foreground">{category.name}</p>
         )}
-        <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{product.description}</p>
         <div className="flex items-center justify-between gap-2">
           {product.price != null && (
-            <p className="text-base font-semibold text-primary">{formatPrice(product.price)}</p>
+            <p className="text-base font-bold text-foreground">{formatPrice(product.price)}</p>
           )}
           {showViewDetails && (
-            <span className="text-sm font-medium text-primary">
-              View details →
+            <span className="text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+              View →
             </span>
           )}
         </div>

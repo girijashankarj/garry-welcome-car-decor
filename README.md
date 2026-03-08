@@ -64,6 +64,10 @@ src/
 └── theme/            # CSS variables
 ```
 
+## Hero image
+
+The home page hero uses `public/images/hero.jpg` (configurable in `src/data/site.json` → `home.heroImage`). For a sharp full-screen hero, use an image at least **1920×1080** pixels. Replace `public/images/hero.jpg` with your high-resolution image.
+
 ## Deployment
 
 The app is built as a static export. After `npm run build`, the `out/` directory contains the static site.

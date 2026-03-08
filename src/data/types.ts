@@ -2,6 +2,10 @@ export interface Brand {
   id: string;
   name: string;
   slug: string;
+  /** Path to brand logo image (e.g. /images/brands/maruti-suzuki.svg) */
+  logoPath?: string;
+  /** Tailwind class for logo/accent color (e.g. bg-primary/20, bg-secondary/20) */
+  accentClass?: string;
 }
 
 export interface CarModel {
