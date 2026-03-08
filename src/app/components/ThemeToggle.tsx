@@ -1,16 +1,18 @@
 'use client';
 
 import { useTheme } from './ThemeContext';
+import { useLocale } from './LocaleProvider';
 
 export default function ThemeToggle() {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { t } = useLocale();
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
       className="rounded-full p-2 text-primary transition-colors hover:bg-muted"
-      aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDarkMode ? t('aria')('switchToLight') : t('aria')('switchToDark')}
     >
       {isDarkMode ? (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>

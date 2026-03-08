@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import { LocaleLink } from '@/lib/locale-link';
+import { useLocale } from './LocaleProvider';
 import { assetPath } from '@/lib/assetPath';
 
 interface FaqEmbedding {
@@ -19,6 +20,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
 }
 
 export default function Chatbot() {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const [embeddings, setEmbeddings] = useState<FaqEmbedding[] | null>(null);
   const [modelReady, setModelReady] = useState(false);
@@ -116,7 +118,7 @@ export default function Chatbot() {
         type="button"
         onClick={() => setOpen((o) => !o)}
         className="fixed bottom-20 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:bottom-6"
-        aria-label={open ? 'Close chat' : 'Open FAQ chat'}
+        aria-label={open ? t('aria')('closeChat') : t('aria')('openChat')}
       >
         {open ? (
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
@@ -133,24 +135,24 @@ export default function Chatbot() {
         <div
           className="fixed bottom-36 right-4 z-50 flex w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl dark:border-white/10 sm:bottom-24"
           role="dialog"
-          aria-label="FAQ chat"
+          aria-label={t('aria')('faqChat')}
         >
           <div className="border-b border-border bg-primary/10 px-4 py-3 dark:border-white/10">
-            <h2 className="text-sm font-semibold text-foreground">FAQ & Guides</h2>
-            <p className="text-xs text-muted-foreground">Ask about ordering, delivery, payment, returns</p>
+            <h2 className="text-sm font-semibold text-foreground">{t('chatbot')('title')}</h2>
+            <p className="text-xs text-muted-foreground">{t('chatbot')('subtitle')}</p>
           </div>
 
           <div className="flex max-h-80 flex-1 flex-col overflow-hidden">
             {loading && !modelReady ? (
               <div className="flex flex-1 items-center justify-center p-6">
-                <p className="text-sm text-muted-foreground">Loading… (first time may take a moment)</p>
+                <p className="text-sm text-muted-foreground">{t('chatbot')('loading')}</p>
               </div>
             ) : error ? (
               <div className="p-4">
                 <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-                <Link href="/contact" className="mt-2 inline-block text-sm text-primary hover:underline">
-                  Contact us directly →
-                </Link>
+                <LocaleLink href="/contact" className="mt-2 inline-block text-sm text-primary hover:underline">
+                  {t('common')('contactUs')} →
+                </LocaleLink>
               </div>
             ) : (
               <>
@@ -161,9 +163,9 @@ export default function Chatbot() {
                         <li key={i} className="rounded-lg bg-muted/50 p-3 text-sm">
                           <p className="text-foreground">{r.answer}</p>
                           {r.link && (
-                            <Link href={r.link} className="mt-2 inline-block text-xs font-medium text-primary hover:underline">
-                              Learn more →
-                            </Link>
+                            <LocaleLink href={r.link} className="mt-2 inline-block text-xs font-medium text-primary hover:underline">
+                              {t('common')('learnMore')} →
+                            </LocaleLink>
                           )}
                         </li>
                       ))}
@@ -182,17 +184,17 @@ export default function Chatbot() {
                       type="text"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="e.g. How do I order?"
+                      placeholder={t('chatbot')('placeholder')}
                       className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/10"
                       disabled={!modelReady || loading}
-                      aria-label="Ask a question"
+                      aria-label={t('aria')('askQuestion')}
                     />
                     <button
                       type="submit"
                       disabled={!modelReady || loading || !query.trim()}
                       className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
                     >
-                      {loading ? '…' : 'Ask'}
+                      {loading ? '…' : t('chatbot')('ask')}
                     </button>
                   </div>
                 </form>

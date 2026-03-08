@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -16,6 +15,8 @@ import { assetPath } from '@/lib/assetPath';
 import type { ProductCategoryId } from '@/data/types';
 import ProductCard from './components/ProductCard';
 import ContactSection from './components/ContactSection';
+import { LocaleLink, getLocalePath } from '@/lib/locale-link';
+import { useLocale } from './components/LocaleProvider';
 
 const MotionDiv = motion.div;
 
@@ -26,16 +27,14 @@ const itemVariants = {
 
 export default function HomeContent() {
   const router = useRouter();
+  const { locale, t } = useLocale();
   const [searchQuery, setSearchQuery] = useState('');
   const featuredProducts = getAllProducts().slice(0, 12);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      router.push('/search');
-    }
+    const path = searchQuery.trim() ? `/search?q=${encodeURIComponent(searchQuery.trim())}` : '/search';
+    router.push(getLocalePath(locale, path));
   };
 
   return (
@@ -62,9 +61,9 @@ export default function HomeContent() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Car accessories
+            {t('home')('heroTitle')}
             <br />
-            <span className="text-primary">that fit your ride</span>
+            <span className="text-primary">{t('home')('heroTitleHighlight')}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +71,7 @@ export default function HomeContent() {
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
             className="mb-2 text-lg text-white/80 sm:text-xl"
           >
-            PPF, chargers, headlights, dash cams & more – delivered across India
+            {t('home')('heroSubtitle')}
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -80,7 +79,7 @@ export default function HomeContent() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="mb-10 text-sm font-medium text-white/90 sm:text-base"
           >
-            Delivery all over India • Open for collaboration • Trusted references for car services
+            {t('home')('heroTagline')}
           </motion.p>
 
           {/* Search - primary CTA */}
@@ -96,15 +95,15 @@ export default function HomeContent() {
                 type="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
+                placeholder={t('home')('searchPlaceholder')}
                 className="flex-1 rounded-xl bg-transparent px-5 py-3.5 text-foreground placeholder:text-muted-foreground focus:outline-none"
-                aria-label="Search products"
+                aria-label={t('home')('searchPlaceholder')}
               />
               <button
                 type="submit"
                 className="rounded-xl bg-primary px-6 py-3.5 font-semibold text-white transition-all hover:opacity-95 active:scale-[0.98]"
               >
-                Search
+                {t('home')('search')}
               </button>
             </div>
           </motion.form>
@@ -116,30 +115,30 @@ export default function HomeContent() {
             transition={{ delay: 0.4 }}
             className="mt-8 flex flex-wrap justify-center gap-3"
           >
-            <Link
+            <LocaleLink
               href="/products"
               className="rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
-              Shop all
-            </Link>
-            <Link
+              {t('home')('shopAll')}
+            </LocaleLink>
+            <LocaleLink
               href="/categories"
               className="rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
-              Categories
-            </Link>
-            <Link
+              {t('home')('categories')}
+            </LocaleLink>
+            <LocaleLink
               href="/brands"
               className="rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
-              By car
-            </Link>
-            <Link
+              {t('home')('byCar')}
+            </LocaleLink>
+            <LocaleLink
               href="/contact"
               className="rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
-              Contact
-            </Link>
+              {t('home')('contact')}
+            </LocaleLink>
           </motion.div>
         </div>
       </section>
@@ -149,15 +148,15 @@ export default function HomeContent() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mb-10 flex items-end justify-between">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Featured</h2>
-              <p className="mt-1 text-muted-foreground">Handpicked car accessories</p>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">{t('home')('featured')}</h2>
+              <p className="mt-1 text-muted-foreground">{t('home')('handpicked')}</p>
             </div>
-            <Link
+            <LocaleLink
               href="/products"
               className="hidden text-sm font-medium text-primary hover:underline sm:block"
             >
-              View all →
-            </Link>
+              {t('home')('viewAll')} →
+            </LocaleLink>
           </div>
 
           <motion.ul
@@ -169,32 +168,32 @@ export default function HomeContent() {
           >
             {featuredProducts.map((product) => (
               <motion.li key={product.id} variants={itemVariants}>
-                <Link href={`/products/${product.slug}`} className="block no-underline">
+                <LocaleLink href={`/products/${product.slug}`} className="block no-underline">
                   <ProductCard product={product} />
-                </Link>
+                </LocaleLink>
               </motion.li>
             ))}
           </motion.ul>
 
-          <Link
+          <LocaleLink
             href="/products"
             className="mt-8 inline-block rounded-xl bg-primary px-8 py-3.5 font-semibold text-white transition-all hover:opacity-95 active:scale-[0.98] sm:hidden"
           >
-            View all products
-          </Link>
+            {t('home')('viewAllProducts')}
+          </LocaleLink>
         </div>
       </section>
 
       {/* Categories - horizontal scroll on mobile, compact grid on desktop */}
       <section className="border-y border-border bg-muted/30 py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">Shop by category</h2>
+          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">{t('home')('shopByCategory')}</h2>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-6">
             {categories.map((cat) => {
               const imgSrc = categoryImages[cat.id as ProductCategoryId];
               const count = getProductsByCategoryId(cat.id).length;
               return (
-                <Link
+                <LocaleLink
                   key={cat.id}
                   href={`/categories/${cat.slug}`}
                   className="group flex min-w-[140px] shrink-0 flex-col overflow-hidden rounded-2xl bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg md:min-w-0"
@@ -210,9 +209,9 @@ export default function HomeContent() {
                   </div>
                   <div className="p-3">
                     <span className="block truncate text-sm font-semibold text-foreground">{cat.name}</span>
-                    <span className="text-xs text-muted-foreground">{count} products</span>
+                    <span className="text-xs text-muted-foreground">{count} {t('common')('products')}</span>
                   </div>
-                </Link>
+                </LocaleLink>
               );
             })}
           </div>
@@ -222,12 +221,16 @@ export default function HomeContent() {
       {/* Brands - compact pill strip */}
       <section className="py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">Browse by car</h2>
+          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">{t('home')('browseByCar')}</h2>
           <div className="flex flex-wrap gap-3">
             {brands.map((brand) => {
               const modelCount = getModelsByBrandId(brand.id).length;
+              const brandName = (() => {
+                const v = t('brandsDetail')(`${brand.slug}-name`);
+                return v !== `${brand.slug}-name` ? v : brand.name;
+              })();
               return (
-                <Link
+                <LocaleLink
                   key={brand.id}
                   href={`/brands/${brand.slug}`}
                   className="flex items-center gap-2.5 rounded-2xl border border-border bg-card px-4 py-3 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-soft-lg dark:border-white/10"
@@ -245,40 +248,40 @@ export default function HomeContent() {
                     </div>
                   )}
                   <div>
-                    <span className="block text-sm font-semibold text-foreground">{brand.name}</span>
-                    <span className="text-xs text-muted-foreground">{modelCount} models</span>
+                    <span className="block text-sm font-semibold text-foreground">{brandName}</span>
+                    <span className="text-xs text-muted-foreground">{modelCount} {t('common')('models')}</span>
                   </div>
-                </Link>
+                </LocaleLink>
               );
             })}
           </div>
-          <Link href="/brands" className="mt-4 inline-block text-sm font-medium text-primary hover:underline">
-            View all brands →
-          </Link>
+          <LocaleLink href="/brands" className="mt-4 inline-block text-sm font-medium text-primary hover:underline">
+            {t('home')('viewAllBrands')} →
+          </LocaleLink>
         </div>
       </section>
 
       {/* What we offer */}
       <section className="border-t border-border py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">What we offer</h2>
+          <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">{t('home')('whatWeOffer')}</h2>
           <ul className="grid list-none gap-4 p-0 sm:grid-cols-3">
             <li className="rounded-xl border border-border bg-card p-4 dark:border-white/10">
-              <h3 className="mb-2 font-semibold text-foreground">Delivery all over India</h3>
+              <h3 className="mb-2 font-semibold text-foreground">{t('home')('deliveryIndia')}</h3>
               <p className="text-sm text-muted-foreground">
-                We provide delivery all over India via courier. Order from anywhere.
+                {t('home')('deliveryIndiaDesc')}
               </p>
             </li>
             <li className="rounded-xl border border-border bg-card p-4 dark:border-white/10">
-              <h3 className="mb-2 font-semibold text-foreground">Open for collaboration</h3>
+              <h3 className="mb-2 font-semibold text-foreground">{t('home')('collaboration')}</h3>
               <p className="text-sm text-muted-foreground">
-                We are open for collaboration to keep your products in stock for sale. Manufacturers and distributors – reach out.
+                {t('home')('collaborationDesc')}
               </p>
             </li>
             <li className="rounded-xl border border-border bg-card p-4 dark:border-white/10">
-              <h3 className="mb-2 font-semibold text-foreground">Car services & references</h3>
+              <h3 className="mb-2 font-semibold text-foreground">{t('home')('carServices')}</h3>
               <p className="text-sm text-muted-foreground">
-                We provide references for insurance, garages, manufacturers, and more. Ask us for trusted recommendations.
+                {t('home')('carServicesDesc')}
               </p>
             </li>
           </ul>
@@ -288,12 +291,12 @@ export default function HomeContent() {
       {/* Contact - Get in Touch, Send us a Message, Google Maps */}
       <section className="border-t border-border bg-primary/5 py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground">Get in touch</h2>
+          <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground">{t('home')('getInTouch')}</h2>
           <p className="mb-8 text-muted-foreground">
-            Reach out for product inquiries, bulk orders, or installation support.{' '}
-            <Link href="/guides" className="text-primary hover:underline">
-              How to order, delivery & returns →
-            </Link>
+            {t('home')('reachOut')}{' '}
+            <LocaleLink href="/guides" className="text-primary hover:underline">
+              {t('home')('howToOrderLink')}
+            </LocaleLink>
           </p>
           <ContactSection />
         </div>

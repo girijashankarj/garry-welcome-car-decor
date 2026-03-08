@@ -4,8 +4,6 @@ import './globals.css';
 import { ThemeProvider } from './components/ThemeContext';
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' });
-import AppLayout from './components/AppLayout';
-import Chatbot from './components/Chatbot';
 import { SITE } from '@/lib/site';
 import { assetPath } from '@/lib/assetPath';
 import Analytics from './components/Analytics';
@@ -65,8 +63,7 @@ export default function RootLayout({
       <body className={`min-h-screen bg-background text-foreground antialiased ${dmSans.variable} font-sans`}>
         <JsonLd />
         <ThemeProvider>
-          <AppLayout>{children}</AppLayout>
-          <Chatbot />
+          {children}
         </ThemeProvider>
         <Analytics />
       </body>
