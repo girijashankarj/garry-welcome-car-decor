@@ -13,10 +13,16 @@ async function loadMessages(locale: Locale): Promise<Messages> {
 
 export function getMessagesSync(locale: Locale): Messages {
   if (messagesCache[locale]) return messagesCache[locale];
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const mod = require(`../../messages/${locale}.json`);
-  messagesCache[locale] = mod;
-  return messagesCache[locale];
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const mod = require(`../../messages/${locale}.json`);
+    const messages = (mod && typeof mod === 'object' && 'default' in mod ? mod.default : mod) as Messages;
+    messagesCache[locale] = messages ?? {};
+    return messagesCache[locale];
+  } catch {
+    messagesCache[locale] = {};
+    return messagesCache[locale];
+  }
 }
 
 export function getTranslations(locale: Locale, namespace: string) {

@@ -8,10 +8,12 @@ const LocaleContext = createContext<{ locale: Locale; t: (ns: string) => (key: s
 
 export function LocaleProvider({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   const value = useMemo(() => {
-    const messages = getMessagesSync(locale);
+    const messages = getMessagesSync(locale) ?? {};
     const t = (ns: string) => {
-      const nsData = (messages[ns] as Record<string, string>) || {};
-      return (key: string) => nsData[key] ?? key;
+      const nsData = (messages && typeof messages === 'object' && messages[ns] && typeof messages[ns] === 'object')
+        ? (messages[ns] as Record<string, string>)
+        : {};
+      return (key: string) => (nsData && key in nsData ? nsData[key] : key);
     };
     return { locale, t };
   }, [locale]);
